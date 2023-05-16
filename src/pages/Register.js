@@ -1,14 +1,18 @@
 import { useState } from "react";
 import styles from "../styles/Register.module.css";
 import { Inter } from "next/font/google";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/router";
 import { app } from "../../firebaseConfig";
+import googleLogo from "../assets/google.png";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Register() {
+  console.log("googleLogo", googleLogo);
   const auth = getAuth(app);
+  const GoogleProvider = new GoogleAuthProvider();
+  const GitHubProvider = new GithubAuthProvider();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,6 +28,17 @@ export default function Register() {
         console.log("error", error);
       });
   };
+
+  const signUpWithGoogle = () =>{
+    signInWithPopup(auth, GoogleProvider)
+    .then(() => {
+      router.push("/Home");
+      console.log("router", router);
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
+};
   return (
     <div>
       <main className={`${styles.main} ${inter.className}`}>
@@ -48,9 +63,11 @@ export default function Register() {
           <button type="submit" className={styles.button} onClick={SignUp}>
             SignUp
           </button>
-          <h2>or</h2>
-          <button type="submit" className={styles.button}>
-            SignIn
+          <button type="submit" className={styles.button} onClick={signUpWithGoogle}>
+            Sign Up with Google
+          </button>
+          <button >
+             {/* <img src={googleLogo.src} alt="Google" className={styles.buttonGoogle}/>!>>*/}
           </button>
         </form>
       </main>

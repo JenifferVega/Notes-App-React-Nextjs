@@ -38,3 +38,12 @@
     justify-content: center;
     height: 100vh;
   }
+
+  .buttonGoogle{
+    margin-top: 1rem;
+    padding: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    height: 50px;
+    width: 100px;
+  }
