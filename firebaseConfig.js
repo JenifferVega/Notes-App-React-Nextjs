@@ -1,16 +1,15 @@
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD2EfBm57NTALixYIzzigXqgRyhBDqbLSk",
-  authDomain: "notes-app-e3514.firebaseapp.com",
-  projectId: "notes-app-e3514",
-  storageBucket: "notes-app-e3514.appspot.com",
-  messagingSenderId: "412693574341",
-  appId: "1:412693574341:web:a47336cb29fbd765cf36ac",
-  measurementId: "G-QB0VXSFMJZ"
+  apiKey: "AIzaSyDBR8xhqmM-pxu-l55rLZkzOJksbHvVAaQ",
+  authDomain: "social-network2-dd27a.firebaseapp.com",
+  projectId: "social-network2-dd27a",
+  storageBucket: "social-network2-dd27a.appspot.com",
+  messagingSenderId: "421542378046",
+  appId: "1:421542378046:web:45c8dcf3e62539bb45ef6f",
+  measurementId: "G-E6CH0XFKM7"
 };
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
