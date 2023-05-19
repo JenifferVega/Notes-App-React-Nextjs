@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../styles/Register.module.css";
 import { Inter } from "next/font/google";
-import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 import { useRouter } from "next/router";
 import { app } from "../../firebaseConfig";
 import googleLogo from "../assets/google.png";
@@ -20,25 +26,36 @@ export default function Register() {
   const SignUp = () => {
     console.log("SignUp", SignUp);
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((response) => {
+        console.log(response.user);
+        sessionStorage.setItem("Item", response.user.accessToken);
         router.push("/Home");
-        console.log("router", router);
       })
       .catch((error) => {
         console.log("error", error);
       });
   };
 
-  const signUpWithGoogle = () =>{
+  const signUpWithGoogle = () => {
     signInWithPopup(auth, GoogleProvider)
-    .then(() => {
-      router.push("/Home");
-      console.log("router", router);
-    })
-    .catch((error) => {
-      console.log("error", error);
+      .then(() => {
+        router.push("/Home");
+        sessionStorage.setItem("Item", response.user.accessToken);
+        console.log("router", router);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+
+    useEffect(() => {
+      let token = sessionStorage.getItem("Token");
+
+      if (Token) {
+        router.push("/Home");
+      }
     });
-};
+  };
+
   return (
     <div>
       <main className={`${styles.main} ${inter.className}`}>
@@ -63,11 +80,15 @@ export default function Register() {
           <button type="submit" className={styles.button} onClick={SignUp}>
             SignUp
           </button>
-          <button type="submit" className={styles.button} onClick={signUpWithGoogle}>
+          <button
+            type="submit"
+            className={styles.button}
+            onClick={signUpWithGoogle}
+          >
             Sign Up with Google
           </button>
-          <button >
-             {/* <img src={googleLogo.src} alt="Google" className={styles.buttonGoogle}/>!>>*/}
+          <button>
+            {/* <img src={googleLogo.src} alt="Google" className={styles.buttonGoogle}/>!>>*/}
           </button>
         </form>
       </main>
