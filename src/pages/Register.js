@@ -15,7 +15,6 @@ import googleLogo from "../assets/google.png";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Register() {
-  console.log("googleLogo", googleLogo);
   const auth = getAuth(app);
   const GoogleProvider = new GoogleAuthProvider();
   const GitHubProvider = new GithubAuthProvider();
@@ -38,23 +37,23 @@ export default function Register() {
 
   const signUpWithGoogle = () => {
     signInWithPopup(auth, GoogleProvider)
-      .then(() => {
-        router.push("/Home");
-        sessionStorage.setItem("Item", response.user.accessToken);
-        console.log("router", router);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
+        .then((response) => {
+            sessionStorage.setItem('Token', response.user.accessToken)
+            console.log(response.user)
+            router.push('/Home')
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+}
 
-    useEffect(() => {
-      let token = sessionStorage.getItem("Token");
+  useEffect(() => {
+    let token = sessionStorage.getItem("Token");
 
-      if (Token) {
-        router.push("/Home");
-      }
-    });
-  };
+    if (token) {
+      router.push("/Home");
+    }
+  }, []);
 
   return (
     <div>
@@ -87,9 +86,9 @@ export default function Register() {
           >
             Sign Up with Google
           </button>
-          <button>
-            {/* <img src={googleLogo.src} alt="Google" className={styles.buttonGoogle}/>!>>*/}
-          </button>
+          {/* <button>
+            <img src={googleLogo} alt="Google" className={styles.buttonGoogle} />
+          </button> */}
         </form>
       </main>
     </div>
