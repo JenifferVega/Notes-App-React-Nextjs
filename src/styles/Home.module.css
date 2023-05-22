@@ -31,6 +31,10 @@
   cursor: pointer;
 }
 
+.post{
+ justify-content: space-evenly;
+ display: flex;
+}
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
